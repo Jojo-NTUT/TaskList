@@ -2,9 +2,7 @@ package com.codurance.training.tasks.console.adapter;
 
 import com.codurance.training.tasks.taskManagement.entities.Project;
 import com.codurance.training.tasks.taskManagement.entities.Task;
-import com.codurance.training.tasks.taskManagement.useCase.AddProjectUseCase;
-import com.codurance.training.tasks.taskManagement.useCase.AddTaskUseCase;
-import com.codurance.training.tasks.taskManagement.useCase.TaskList;
+import com.codurance.training.tasks.taskManagement.useCase.*;
 
 import java.io.PrintWriter;
 
@@ -14,15 +12,21 @@ public class CommandParsing {
 
     private final AddProjectUseCase addProjectUseCase;
     private final AddTaskUseCase addTaskUseCase;
+    private final CheckTaskUseCase checkTaskUseCase;
+    private final UncheckTaskUseCase uncheckTaskUseCase;
     public CommandParsing(
             PrintWriter out,
             TaskList taskList,
             AddProjectUseCase addProjectUseCase,
-            AddTaskUseCase addTaskUseCase) {
+            AddTaskUseCase addTaskUseCase,
+            CheckTaskUseCase checkTaskUseCase,
+            UncheckTaskUseCase uncheckTaskUseCase) {
         this.out = out;
         this.taskList = taskList;
         this.addProjectUseCase = addProjectUseCase;
         this.addTaskUseCase = addTaskUseCase;
+        this.checkTaskUseCase = checkTaskUseCase;
+        this.uncheckTaskUseCase = uncheckTaskUseCase;
     }
 
     public void execute(String commandLine) {
@@ -53,7 +57,7 @@ public class CommandParsing {
 
     private void updateTaskStatus(String idString, boolean done) {
         long id = Long.parseLong(idString);
-        boolean updated = done ? taskList.checkTask(id) : taskList.uncheckTask(id);
+        boolean updated = done ? checkTaskUseCase.checkTask(id) : uncheckTaskUseCase.uncheckTask(id);
 
         if (!updated) {
             out.printf("Could not find a task with an ID of %d.%n", id);

@@ -11,9 +11,7 @@ import com.codurance.training.tasks.console.adapter.CommandParsing;
 import com.codurance.training.tasks.console.framework.TaskListConsole;
 //import com.codurance.training.tasks.taskManagement.framework.InMemoryRepository;
 import com.codurance.training.tasks.taskManagement.framework.InMemoryRepository;
-import com.codurance.training.tasks.taskManagement.useCase.AddProjectUseCase;
-import com.codurance.training.tasks.taskManagement.useCase.AddTaskUseCase;
-import com.codurance.training.tasks.taskManagement.useCase.TaskList;
+import com.codurance.training.tasks.taskManagement.useCase.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -40,7 +38,14 @@ public final class ApplicationTest {
         TaskList taskList = new TaskList(repository);
         AddProjectUseCase addProjectUseCase = new AddProjectUseCase(repository);
         AddTaskUseCase addTaskUseCase = new AddTaskUseCase(repository);
-        CommandParsing commandParsing = new CommandParsing(out, taskList, addProjectUseCase, addTaskUseCase);
+        CheckTaskUseCase checkTaskUseCase = new CheckTaskUseCase(repository);
+        UncheckTaskUseCase uncheckTaskUseCase = new UncheckTaskUseCase(repository);
+        CommandParsing commandParsing = new CommandParsing(out,
+                taskList,
+                addProjectUseCase,
+                addTaskUseCase,
+                checkTaskUseCase,
+                uncheckTaskUseCase);
         TaskListConsole taskListApp = new TaskListConsole(in, out, commandParsing);
         applicationThread = new Thread(taskListApp);
     }
