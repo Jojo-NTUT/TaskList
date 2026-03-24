@@ -6,7 +6,7 @@ import com.codurance.training.tasks.taskManagement.entities.taskListRepository;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InMemoryRepository implements taskListRepository {
+public class inMemoryRepository implements taskListRepository {
     private final List<project> projects = new ArrayList<>();
     private long lastId = 0;
 

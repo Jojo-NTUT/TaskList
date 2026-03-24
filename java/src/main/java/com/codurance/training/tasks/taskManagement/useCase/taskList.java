@@ -3,7 +3,6 @@ package com.codurance.training.tasks.taskManagement.useCase;
 import com.codurance.training.tasks.taskManagement.entities.project;
 import com.codurance.training.tasks.taskManagement.entities.task;
 import com.codurance.training.tasks.taskManagement.entities.taskListRepository;
-import com.codurance.training.tasks.taskManagement.framework.InMemoryRepository;
 
 import java.util.*;
 
@@ -14,7 +13,6 @@ public final class taskList {
     public List<project> findAllProjects() {
         return repository.findAllProjects();
     }
-
 
     public taskList(taskListRepository repository) {
         this.repository = repository;

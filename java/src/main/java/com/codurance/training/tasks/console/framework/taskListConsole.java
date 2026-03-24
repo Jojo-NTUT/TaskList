@@ -1,9 +1,8 @@
 package com.codurance.training.tasks.console.framework;
 
 import com.codurance.training.tasks.console.adapter.commandParsing;
-import com.codurance.training.tasks.taskManagement.framework.InMemoryRepository;
+import com.codurance.training.tasks.taskManagement.framework.inMemoryRepository;
 import com.codurance.training.tasks.taskManagement.useCase.taskList;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -28,7 +27,7 @@ public class taskListConsole implements Runnable {
     public static void main(String[] args) {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         PrintWriter out = new PrintWriter(System.out);
-        new taskListConsole(in, out, new taskList(new InMemoryRepository())).run();
+        new taskListConsole(in, out, new taskList(new inMemoryRepository())).run();
     }
 
     @Override
