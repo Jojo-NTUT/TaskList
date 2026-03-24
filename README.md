@@ -1,13 +1,16 @@
 # 20260326
 ## add business-domain Bounded Contexts
-├── projectManagement  
+```text
+├── taskManagement  
 │   ├── task.java  
 │   ├── project.java  
 │   └── taskList.java  
 └── console  
-    └── taskListConsole.java  
+    └── taskListConsole.java
+```
 ## add Clean Architecture layers
-├── projectManagement  
+```text
+├── taskManagement  
 │   ├── entities  
 │   │   ├── task.java  
 │   │   └── project.java  
@@ -17,12 +20,17 @@
     ├── adapter  
     │   └── commandParsing.java  
     └── framework  
-        └── taskListConsole.java  //main()、run()  
+        └── taskListConsole.java  //main()、run()
+```
 # 20260319 
+```text
 ├── task.java  
 ├── project.java  
 ├── taskList.java  
-└── taskListConsole.java  
+└── taskListConsole.java
+```
 # initial
+```text
 ├── task.java                
 └── taskList.java
+```
