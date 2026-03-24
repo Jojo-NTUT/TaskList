@@ -1,54 +1,21 @@
-package com.codurance.training.tasks.console;
+package com.codurance.training.tasks.console.adapter;
 
-import com.codurance.training.tasks.projectManagement.Project;
-import com.codurance.training.tasks.projectManagement.Task;
-import com.codurance.training.tasks.projectManagement.TaskList;
+import com.codurance.training.tasks.taskManagement.entities.project;
+import com.codurance.training.tasks.taskManagement.entities.task;
+import com.codurance.training.tasks.taskManagement.useCase.taskList;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
-public class TaskListConsole implements Runnable {
-    private static final String QUIT = "quit";
-    private static final String PROMPT = "> ";
-
-    private final BufferedReader in;
+public class commandParsing {
     private final PrintWriter out;
-    private final TaskList taskList;
+    private final taskList taskList;
 
-    public TaskListConsole(BufferedReader in, PrintWriter out, TaskList taskList) {
-        this.in = in;
+    public commandParsing(PrintWriter out, taskList taskList) {
         this.out = out;
         this.taskList = taskList;
     }
 
-    public static void main(String[] args) {
-        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-        PrintWriter out = new PrintWriter(System.out);
-        new TaskListConsole(in, out, new TaskList()).run();
-    }
-
-    @Override
-    public void run() {
-        while (true) {
-            out.print(PROMPT);
-            out.flush();
-
-            String command;
-            try {
-                command = in.readLine();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            if (command == null || QUIT.equals(command)) {
-                break;
-            }
-            execute(command);
-        }
-    }
-
-    private void execute(String commandLine) {
+    public void execute(String commandLine) {
         String[] commandRest = commandLine.split(" ", 2);
         String command = commandRest[0];
 
@@ -102,9 +69,9 @@ public class TaskListConsole implements Runnable {
     }
 
     private void show() {
-        for (Project project : taskList.getProjects()) {
+        for (project project : taskList.getProjects()) {
             out.println(project.getName());
-            for (Task task : project.getTasks()) {
+            for (task task : project.getTasks()) {
                 out.printf("    [%c] %d: %s%n", (task.isDone() ? 'x' : ' '), task.getId(), task.getDescription());
             }
             out.println();

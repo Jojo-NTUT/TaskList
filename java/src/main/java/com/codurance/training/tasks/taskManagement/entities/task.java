@@ -1,11 +1,11 @@
-package com.codurance.training.tasks.projectManagement;
+package com.codurance.training.tasks.taskManagement.entities;
 
-public final class Task {
+public final class task {
     private final long id;
     private final String description;
     private boolean done;
 
-    public Task(long id, String description) {
+    public task(long id, String description) {
         this.id = id;
         this.description = description;
         this.done = false;
