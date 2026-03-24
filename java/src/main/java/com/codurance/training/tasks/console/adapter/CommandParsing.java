@@ -7,20 +7,20 @@ import com.codurance.training.tasks.taskManagement.useCase.*;
 import java.io.PrintWriter;
 
 public class CommandParsing {
-    private final PrintWriter out;
+    private final Console console;
     private final AddProjectUseCase addProjectUseCase;
     private final AddTaskUseCase addTaskUseCase;
     private final CheckTaskUseCase checkTaskUseCase;
     private final UncheckTaskUseCase uncheckTaskUseCase;
     private final ShowProjectsUseCase showProjectsUseCase;
     public CommandParsing(
-            PrintWriter out,
+            Console console,
             AddProjectUseCase addProjectUseCase,
             AddTaskUseCase addTaskUseCase,
             CheckTaskUseCase checkTaskUseCase,
             UncheckTaskUseCase uncheckTaskUseCase,
             ShowProjectsUseCase showProjectsUseCase) {
-        this.out = out;
+        this.console = console;
         this.addProjectUseCase = addProjectUseCase;
         this.addTaskUseCase = addTaskUseCase;
         this.checkTaskUseCase = checkTaskUseCase;
@@ -59,7 +59,7 @@ public class CommandParsing {
         boolean updated = done ? checkTaskUseCase.checkTask(id) : uncheckTaskUseCase.uncheckTask(id);
 
         if (!updated) {
-            out.printf("Could not find a task with an ID of %d.%n", id);
+            console.printf("Could not find a task with an ID of %d.%n", id);
         }
     }
 
@@ -75,34 +75,34 @@ public class CommandParsing {
             String description = projectTask[1];
 
             if (!addTaskUseCase.addTask(projectName, description)) {
-                out.printf("Could not find a project with the name \"%s\".", projectName);
-                out.println();
+                console.printf("Could not find a project with the name \"%s\".", projectName);
+                console.println("");
             }
         }
     }
 
     private void show() {
         for (Project project : showProjectsUseCase.findAllProjects()) {
-            out.println(project.getName());
+            console.println(project.getName());
             for (Task task : project.getTasks()) {
-                out.printf("    [%c] %d: %s%n", (task.isDone() ? 'x' : ' '), task.getId(), task.getDescription());
+                console.printf("    [%c] %d: %s%n", (task.isDone() ? 'x' : ' '), task.getId(), task.getDescription());
             }
-            out.println();
+            console.println("");
         }
     }
 
     private void help() {
-        out.println("Commands:");
-        out.println("  show");
-        out.println("  add project <project name>");
-        out.println("  add task <project name> <task description>");
-        out.println("  check <task ID>");
-        out.println("  uncheck <task ID>");
-        out.println();
+        console.println("Commands:");
+        console.println("  show");
+        console.println("  add project <project name>");
+        console.println("  add task <project name> <task description>");
+        console.println("  check <task ID>");
+        console.println("  uncheck <task ID>");
+        console.println("");
     }
 
     private void error(String command) {
-        out.printf("I don't know what the command \"%s\" is.", command);
-        out.println();
+        console.printf("I don't know what the command \"%s\" is.", command);
+        console.println("");
     }
 }

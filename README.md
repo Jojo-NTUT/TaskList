@@ -60,6 +60,75 @@
     └── framework  
         └── taskListConsole.java  
 ```
+## change taskListConsole name to taskList 
+because contain main() and run() 
+```text
+├── taskManagement  
+│   ├── entities  
+│   │   ├── task.java  
+│   │   ├── project.java  
+│   │   └── taskListRepository.java  
+│   ├── useCase  
+│   │   ├── addProjectUseCase.java 
+│   │   ├── addTaskUseCase.java 
+│   │   ├── checkTask.java 
+│   │   ├── uncheckTask.java 
+│   │   └── ShowProjectUseCase.java  
+│   └── framework 
+│       └── inMemoryRepository.java  
+└── console   
+    ├── adapter  
+    │   └── commandParsing.java  
+    └── framework  
+        └── taskList.java  
+```
+## add interface adapter console and framework systemConsole for DIP
+因為commandParsing會用到framework layer的PrintWriter
+```text
+├── taskManagement  
+│   ├── entities  
+│   │   ├── task.java  
+│   │   ├── project.java  
+│   │   └── taskListRepository.java  
+│   ├── useCase  
+│   │   ├── addProjectUseCase.java 
+│   │   ├── addTaskUseCase.java 
+│   │   ├── checkTask.java 
+│   │   ├── uncheckTask.java 
+│   │   └── ShowProjectUseCase.java  
+│   └── framework 
+│       └── inMemoryRepository.java  
+└── console   
+    ├── adapter  
+    │   ├── console.java  
+    │   └── commandParsing.java  
+    └── framework  
+        ├── systemConsole.java   
+        └── taskList.java 
+```
+## using  Command Pattern to refactor CommanParsing
+```text
+├── taskManagement  
+│   ├── entities  
+│   │   ├── task.java  
+│   │   ├── project.java  
+│   │   └── taskListRepository.java  
+│   ├── useCase  
+│   │   ├── addProjectUseCase.java 
+│   │   ├── addTaskUseCase.java 
+│   │   ├── checkTask.java 
+│   │   ├── uncheckTask.java 
+│   │   └── ShowProjectUseCase.java  
+│   └── framework 
+│       └── inMemoryRepository.java  
+└── console   
+    ├── adapter  
+    │   ├── console.java  
+    │   └── commandParsing.java  
+    └── framework  
+        ├── systemConsole.java   
+        └── taskList.java 
+```
 # 20260319 
 ```text
 ├── task.java  
