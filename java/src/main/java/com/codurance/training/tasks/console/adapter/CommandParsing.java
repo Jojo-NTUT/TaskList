@@ -8,25 +8,24 @@ import java.io.PrintWriter;
 
 public class CommandParsing {
     private final PrintWriter out;
-    private final TaskList taskList;
-
     private final AddProjectUseCase addProjectUseCase;
     private final AddTaskUseCase addTaskUseCase;
     private final CheckTaskUseCase checkTaskUseCase;
     private final UncheckTaskUseCase uncheckTaskUseCase;
+    private final ShowProjectsUseCase showProjectsUseCase;
     public CommandParsing(
             PrintWriter out,
-            TaskList taskList,
             AddProjectUseCase addProjectUseCase,
             AddTaskUseCase addTaskUseCase,
             CheckTaskUseCase checkTaskUseCase,
-            UncheckTaskUseCase uncheckTaskUseCase) {
+            UncheckTaskUseCase uncheckTaskUseCase,
+            ShowProjectsUseCase showProjectsUseCase) {
         this.out = out;
-        this.taskList = taskList;
         this.addProjectUseCase = addProjectUseCase;
         this.addTaskUseCase = addTaskUseCase;
         this.checkTaskUseCase = checkTaskUseCase;
         this.uncheckTaskUseCase = uncheckTaskUseCase;
+        this.showProjectsUseCase = showProjectsUseCase;
     }
 
     public void execute(String commandLine) {
@@ -83,7 +82,7 @@ public class CommandParsing {
     }
 
     private void show() {
-        for (Project project : taskList.findAllProjects()) {
+        for (Project project : showProjectsUseCase.findAllProjects()) {
             out.println(project.getName());
             for (Task task : project.getTasks()) {
                 out.printf("    [%c] %d: %s%n", (task.isDone() ? 'x' : ' '), task.getId(), task.getDescription());

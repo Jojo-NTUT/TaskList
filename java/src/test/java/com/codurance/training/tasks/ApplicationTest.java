@@ -34,18 +34,20 @@ public final class ApplicationTest {
     public ApplicationTest() throws IOException {
         BufferedReader in = new BufferedReader(new InputStreamReader(new PipedInputStream(inStream)));
         PrintWriter out = new PrintWriter(new PipedOutputStream(outStream), true);
+
         InMemoryRepository repository = new InMemoryRepository();
-        TaskList taskList = new TaskList(repository);
+
         AddProjectUseCase addProjectUseCase = new AddProjectUseCase(repository);
         AddTaskUseCase addTaskUseCase = new AddTaskUseCase(repository);
         CheckTaskUseCase checkTaskUseCase = new CheckTaskUseCase(repository);
         UncheckTaskUseCase uncheckTaskUseCase = new UncheckTaskUseCase(repository);
+        ShowProjectsUseCase showProjectsUseCase = new ShowProjectsUseCase(repository);
         CommandParsing commandParsing = new CommandParsing(out,
-                taskList,
                 addProjectUseCase,
                 addTaskUseCase,
                 checkTaskUseCase,
-                uncheckTaskUseCase);
+                uncheckTaskUseCase,
+                showProjectsUseCase);
         TaskListConsole taskListApp = new TaskListConsole(in, out, commandParsing);
         applicationThread = new Thread(taskListApp);
     }

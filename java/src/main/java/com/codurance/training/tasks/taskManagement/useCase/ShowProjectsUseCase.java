@@ -1,22 +1,18 @@
 package com.codurance.training.tasks.taskManagement.useCase;
 
 import com.codurance.training.tasks.taskManagement.entities.Project;
-import com.codurance.training.tasks.taskManagement.entities.Task;
 import com.codurance.training.tasks.taskManagement.entities.TaskListRepository;
 
-import java.util.*;
+import java.util.List;
 
-public final class TaskList {
-
+public class ShowProjectsUseCase {
     private final TaskListRepository repository;
+
+    public ShowProjectsUseCase(TaskListRepository repository) {
+        this.repository = repository;
+    }
 
     public List<Project> findAllProjects() {
         return repository.findAllProjects();
     }
-
-    public TaskList(TaskListRepository repository) {
-        this.repository = repository;
-    }
-
-
 }

@@ -35,13 +35,14 @@ public class TaskListConsole implements Runnable {
         AddTaskUseCase addTaskUseCase = new AddTaskUseCase(repository);
         CheckTaskUseCase checkTaskUseCase = new CheckTaskUseCase(repository);
         UncheckTaskUseCase uncheckTaskUseCase = new UncheckTaskUseCase(repository);
+        ShowProjectsUseCase showProjectsUseCase = new ShowProjectsUseCase(repository);
 
         CommandParsing commandParsing = new CommandParsing(out,
-                new TaskList(repository),
                 addProjectUseCase,
                 addTaskUseCase,
                 checkTaskUseCase,
-                uncheckTaskUseCase);
+                uncheckTaskUseCase,
+                showProjectsUseCase);
 
         new TaskListConsole(in, out,commandParsing).run();
     }
