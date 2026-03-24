@@ -6,6 +6,9 @@ import java.io.InputStreamReader;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.io.PrintWriter;
+
+import com.codurance.training.tasks.console.TaskListConsole;
+import com.codurance.training.tasks.projectManagement.TaskList;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

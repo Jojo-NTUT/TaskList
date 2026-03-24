@@ -1,4 +1,8 @@
-package com.codurance.training.tasks;
+package com.codurance.training.tasks.console;
+
+import com.codurance.training.tasks.projectManagement.Project;
+import com.codurance.training.tasks.projectManagement.Task;
+import com.codurance.training.tasks.projectManagement.TaskList;
 
 import java.io.BufferedReader;
 import java.io.IOException;
