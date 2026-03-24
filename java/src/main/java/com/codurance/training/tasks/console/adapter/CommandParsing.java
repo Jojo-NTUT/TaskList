@@ -1,18 +1,24 @@
 package com.codurance.training.tasks.console.adapter;
 
-import com.codurance.training.tasks.taskManagement.entities.project;
-import com.codurance.training.tasks.taskManagement.entities.task;
-import com.codurance.training.tasks.taskManagement.useCase.taskList;
+import com.codurance.training.tasks.taskManagement.entities.Project;
+import com.codurance.training.tasks.taskManagement.entities.Task;
+import com.codurance.training.tasks.taskManagement.useCase.AddProjectUseCase;
+import com.codurance.training.tasks.taskManagement.useCase.TaskList;
 
 import java.io.PrintWriter;
 
-public class commandParsing {
+public class CommandParsing {
     private final PrintWriter out;
-    private final taskList taskList;
+    private final TaskList taskList;
 
-    public commandParsing(PrintWriter out, taskList taskList) {
+    private final AddProjectUseCase addProjectUseCase;
+    public CommandParsing(
+            PrintWriter out,
+            TaskList taskList,
+            AddProjectUseCase addProjectUseCase) {
         this.out = out;
         this.taskList = taskList;
+        this.addProjectUseCase = addProjectUseCase;
     }
 
     public void execute(String commandLine) {
@@ -55,7 +61,7 @@ public class commandParsing {
         String subcommand = subcommandRest[0];
 
         if ("project".equals(subcommand)) {
-            taskList.addProject(subcommandRest[1]);
+            addProjectUseCase.addProject(subcommandRest[1]);
         } else if ("task".equals(subcommand)) {
             String[] projectTask = subcommandRest[1].split(" ", 2);
             String projectName = projectTask[0];
@@ -69,9 +75,9 @@ public class commandParsing {
     }
 
     private void show() {
-        for (project project : taskList.findAllProjects()) {
+        for (Project project : taskList.findAllProjects()) {
             out.println(project.getName());
-            for (task task : project.getTasks()) {
+            for (Task task : project.getTasks()) {
                 out.printf("    [%c] %d: %s%n", (task.isDone() ? 'x' : ' '), task.getId(), task.getDescription());
             }
             out.println();

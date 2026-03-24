@@ -3,11 +3,11 @@ package com.codurance.training.tasks.taskManagement.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class project {
+public final class Project {
     private final String name;
-    private final List<task> tasks = new ArrayList<>();
+    private final List<Task> Tasks = new ArrayList<>();
 
-    public project(String name) {
+    public Project(String name) {
         this.name = name;
     }
 
@@ -15,16 +15,16 @@ public final class project {
         return name;
     }
 
-    public List<task> getTasks() {
-        return tasks;
+    public List<Task> getTasks() {
+        return Tasks;
     }
 
-    public void addTask(task task) {
-        tasks.add(task);
+    public void addTask(Task task) {
+        Tasks.add(task);
     }
 
-    public task findTaskById(long id) {
-        for (task task : tasks) {
+    public Task findTaskById(long id) {
+        for (Task task : Tasks) {
             if (task.getId() == id) {
                 return task;
             }

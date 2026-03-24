@@ -6,13 +6,13 @@ import java.io.InputStreamReader;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.io.PrintWriter;
-import java.util.List;
 
-import com.codurance.training.tasks.console.framework.taskListConsole;
-import com.codurance.training.tasks.taskManagement.entities.taskListRepository;
+import com.codurance.training.tasks.console.adapter.CommandParsing;
+import com.codurance.training.tasks.console.framework.TaskListConsole;
 //import com.codurance.training.tasks.taskManagement.framework.InMemoryRepository;
-import com.codurance.training.tasks.taskManagement.framework.inMemoryRepository;
-import com.codurance.training.tasks.taskManagement.useCase.taskList;
+import com.codurance.training.tasks.taskManagement.framework.InMemoryRepository;
+import com.codurance.training.tasks.taskManagement.useCase.AddProjectUseCase;
+import com.codurance.training.tasks.taskManagement.useCase.TaskList;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,12 +29,17 @@ public final class ApplicationTest {
     private final PipedInputStream outStream = new PipedInputStream();
     private final BufferedReader outReader = new BufferedReader(new InputStreamReader(outStream));
 
+
     private Thread applicationThread;
 
     public ApplicationTest() throws IOException {
         BufferedReader in = new BufferedReader(new InputStreamReader(new PipedInputStream(inStream)));
         PrintWriter out = new PrintWriter(new PipedOutputStream(outStream), true);
-        taskListConsole taskListApp = new taskListConsole(in, out, new taskList(new inMemoryRepository()));
+
+        InMemoryRepository repository = new InMemoryRepository();
+        CommandParsing commandParsing = new CommandParsing(out, new TaskList(repository),new AddProjectUseCase(repository));
+
+        TaskListConsole taskListApp = new TaskListConsole(in, out, commandParsing);
         applicationThread = new Thread(taskListApp);
     }
 

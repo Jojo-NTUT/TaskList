@@ -47,6 +47,7 @@
 │   │   ├── project.java  
 │   │   └── taskListRepository.java  
 │   ├── useCase  
+│   │   ├── addProjectUseCase.java 
 │   │   └── taskList.java  
 │   └── framework 
 │       └── inMemoryRepository.java  
