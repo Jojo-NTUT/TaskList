@@ -1,3 +1,15 @@
+# initial
+```text
+├── task.java                
+└── taskList.java
+```
+# 20260319
+```text
+├── task.java  
+├── project.java  
+├── taskList.java  
+└── taskListConsole.java
+```
 # 20260326
 ## add business-domain Bounded Contexts
 ```text
@@ -138,16 +150,4 @@ Factory Pattern 用來負責command物件的create
         ├── commandFactory.java 
         ├── systemConsole.java   
         └── taskList.java 
-```
-# 20260319 
-```text
-├── task.java  
-├── project.java  
-├── taskList.java  
-└── taskListConsole.java
-```
-# initial
-```text
-├── task.java                
-└── taskList.java
 ```
