@@ -8,6 +8,7 @@ import java.io.PipedOutputStream;
 import java.io.PrintWriter;
 
 import com.codurance.training.tasks.console.framework.taskListConsole;
+import com.codurance.training.tasks.taskManagement.framework.InMemoryRepository;
 import com.codurance.training.tasks.taskManagement.useCase.taskList;
 import org.junit.After;
 import org.junit.Before;
@@ -30,7 +31,7 @@ public final class ApplicationTest {
     public ApplicationTest() throws IOException {
         BufferedReader in = new BufferedReader(new InputStreamReader(new PipedInputStream(inStream)));
         PrintWriter out = new PrintWriter(new PipedOutputStream(outStream), true);
-        taskListConsole taskListApp = new taskListConsole(in, out, new taskList());
+        taskListConsole taskListApp = new taskListConsole(in, out, new taskList(new InMemoryRepository()));
         applicationThread = new Thread(taskListApp);
     }
 

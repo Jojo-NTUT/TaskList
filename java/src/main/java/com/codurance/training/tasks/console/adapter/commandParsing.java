@@ -69,7 +69,7 @@ public class commandParsing {
     }
 
     private void show() {
-        for (project project : taskList.getProjects()) {
+        for (project project : taskList.findAllProjects()) {
             out.println(project.getName());
             for (task task : project.getTasks()) {
                 out.printf("    [%c] %d: %s%n", (task.isDone() ? 'x' : ' '), task.getId(), task.getDescription());

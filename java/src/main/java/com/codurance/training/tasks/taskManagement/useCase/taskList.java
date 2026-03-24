@@ -2,33 +2,40 @@ package com.codurance.training.tasks.taskManagement.useCase;
 
 import com.codurance.training.tasks.taskManagement.entities.project;
 import com.codurance.training.tasks.taskManagement.entities.task;
+import com.codurance.training.tasks.taskManagement.entities.taskListRepository;
+import com.codurance.training.tasks.taskManagement.framework.InMemoryRepository;
 
 import java.util.*;
 
 public final class taskList {
-    private final List<project> projects = new ArrayList<>();
-    private long lastId = 0;
 
-    public List<project> getProjects() {
-        return projects;
+    private final taskListRepository repository;
+
+    public List<project> findAllProjects() {
+        return repository.findAllProjects();
+    }
+
+
+    public taskList(taskListRepository repository) {
+        this.repository = repository;
     }
 
     public void addProject(String name) {
-        projects.add(new project(name));
+        repository.findAllProjects().add(new project(name));
     }
 
     public boolean addTask(String projectName, String description) {
-        project project = findProjectByName(projectName);
+        project project = repository.findProjectByName(projectName);
         if (project == null) {
             return false;
     }
 
-        project.addTask(new task(nextId(), description));
+        project.addTask(new task(repository.nextId(), description));
         return true;
     }
 
     public boolean checkTask(long id) {
-        task task = findTaskById(id);
+        task task = repository.findTaskById(id);
         if (task == null) {
             return false;
     }
@@ -37,34 +44,11 @@ public final class taskList {
     }
 
     public boolean uncheckTask(long id) {
-        task task = findTaskById(id);
+        task task = repository.findTaskById(id);
         if (task == null) {
             return false;
         }
         task.markAsUndone();
         return true;
-    }
-
-    private project findProjectByName(String name) {
-        for (project project : projects) {
-            if (project.getName().equals(name)) {
-                return project;
-            }
-        }
-        return null;
-    }
-
-    private task findTaskById(long id) {
-        for (project project : projects) {
-            task task = project.findTaskById(id);
-            if (task != null) {
-                return task;
-            }
-        }
-        return null;
-    }
-
-    private long nextId() {
-        return ++lastId;
     }
 }
