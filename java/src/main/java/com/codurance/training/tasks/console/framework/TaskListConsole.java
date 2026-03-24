@@ -3,6 +3,7 @@ package com.codurance.training.tasks.console.framework;
 import com.codurance.training.tasks.console.adapter.CommandParsing;
 import com.codurance.training.tasks.taskManagement.framework.InMemoryRepository;
 import com.codurance.training.tasks.taskManagement.useCase.AddProjectUseCase;
+import com.codurance.training.tasks.taskManagement.useCase.AddTaskUseCase;
 import com.codurance.training.tasks.taskManagement.useCase.TaskList;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -32,9 +33,9 @@ public class TaskListConsole implements Runnable {
         InMemoryRepository repository = new InMemoryRepository();
         //use case
         AddProjectUseCase addProjectUseCase = new AddProjectUseCase(repository);
+        AddTaskUseCase addTaskUseCase = new AddTaskUseCase(repository);
 
-
-        CommandParsing commandParsing = new CommandParsing(out, new TaskList(repository),addProjectUseCase);
+        CommandParsing commandParsing = new CommandParsing(out, new TaskList(repository),addProjectUseCase,addTaskUseCase);
 
         new TaskListConsole(in, out,commandParsing).run();
     }

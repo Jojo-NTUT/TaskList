@@ -3,6 +3,7 @@ package com.codurance.training.tasks.console.adapter;
 import com.codurance.training.tasks.taskManagement.entities.Project;
 import com.codurance.training.tasks.taskManagement.entities.Task;
 import com.codurance.training.tasks.taskManagement.useCase.AddProjectUseCase;
+import com.codurance.training.tasks.taskManagement.useCase.AddTaskUseCase;
 import com.codurance.training.tasks.taskManagement.useCase.TaskList;
 
 import java.io.PrintWriter;
@@ -12,13 +13,16 @@ public class CommandParsing {
     private final TaskList taskList;
 
     private final AddProjectUseCase addProjectUseCase;
+    private final AddTaskUseCase addTaskUseCase;
     public CommandParsing(
             PrintWriter out,
             TaskList taskList,
-            AddProjectUseCase addProjectUseCase) {
+            AddProjectUseCase addProjectUseCase,
+            AddTaskUseCase addTaskUseCase) {
         this.out = out;
         this.taskList = taskList;
         this.addProjectUseCase = addProjectUseCase;
+        this.addTaskUseCase = addTaskUseCase;
     }
 
     public void execute(String commandLine) {
@@ -67,7 +71,7 @@ public class CommandParsing {
             String projectName = projectTask[0];
             String description = projectTask[1];
 
-            if (!taskList.addTask(projectName, description)) {
+            if (!addTaskUseCase.addTask(projectName, description)) {
                 out.printf("Could not find a project with the name \"%s\".", projectName);
                 out.println();
             }

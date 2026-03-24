@@ -12,6 +12,7 @@ import com.codurance.training.tasks.console.framework.TaskListConsole;
 //import com.codurance.training.tasks.taskManagement.framework.InMemoryRepository;
 import com.codurance.training.tasks.taskManagement.framework.InMemoryRepository;
 import com.codurance.training.tasks.taskManagement.useCase.AddProjectUseCase;
+import com.codurance.training.tasks.taskManagement.useCase.AddTaskUseCase;
 import com.codurance.training.tasks.taskManagement.useCase.TaskList;
 import org.junit.After;
 import org.junit.Before;
@@ -35,10 +36,11 @@ public final class ApplicationTest {
     public ApplicationTest() throws IOException {
         BufferedReader in = new BufferedReader(new InputStreamReader(new PipedInputStream(inStream)));
         PrintWriter out = new PrintWriter(new PipedOutputStream(outStream), true);
-
         InMemoryRepository repository = new InMemoryRepository();
-        CommandParsing commandParsing = new CommandParsing(out, new TaskList(repository),new AddProjectUseCase(repository));
-
+        TaskList taskList = new TaskList(repository);
+        AddProjectUseCase addProjectUseCase = new AddProjectUseCase(repository);
+        AddTaskUseCase addTaskUseCase = new AddTaskUseCase(repository);
+        CommandParsing commandParsing = new CommandParsing(out, taskList, addProjectUseCase, addTaskUseCase);
         TaskListConsole taskListApp = new TaskListConsole(in, out, commandParsing);
         applicationThread = new Thread(taskListApp);
     }

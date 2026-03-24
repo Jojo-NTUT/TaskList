@@ -18,15 +18,6 @@ public final class TaskList {
         this.repository = repository;
     }
 
-    public boolean addTask(String projectName, String description) {
-        Project project = repository.findProjectByName(projectName);
-        if (project == null) {
-            return false;
-    }
-
-        project.addTask(new Task(repository.nextId(), description));
-        return true;
-    }
 
     public boolean checkTask(long id) {
         Task task = repository.findTaskById(id);
