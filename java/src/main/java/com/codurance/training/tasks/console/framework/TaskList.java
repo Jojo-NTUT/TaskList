@@ -1,12 +1,10 @@
 package com.codurance.training.tasks.console.framework;
 
-import com.codurance.training.tasks.console.adapter.CommandParsing;
 import com.codurance.training.tasks.console.adapter.Console;
 import com.codurance.training.tasks.taskManagement.framework.InMemoryRepository;
 import com.codurance.training.tasks.taskManagement.useCase.*;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
@@ -15,13 +13,13 @@ public class TaskList implements Runnable {
     private static final String PROMPT = "> ";
 
     private final Console console;
-    private final CommandParsing commandParsing;
+    private final CommandFactory commandFactory;
 
 
 
-    public TaskList(Console console, CommandParsing commandParsing) {
+    public TaskList(Console console, CommandFactory commandFactory) {
         this.console = console;
-        this.commandParsing = commandParsing;
+        this.commandFactory = commandFactory;
     }
 
     public static void main(String[] args) {
@@ -37,7 +35,7 @@ public class TaskList implements Runnable {
         UncheckTaskUseCase uncheckTaskUseCase = new UncheckTaskUseCase(repository);
         ShowProjectsUseCase showProjectsUseCase = new ShowProjectsUseCase(repository);
 
-        CommandParsing commandParsing = new CommandParsing(console,
+        CommandFactory commandParsing = new CommandFactory(console,
                 addProjectUseCase,
                 addTaskUseCase,
                 checkTaskUseCase,
@@ -57,7 +55,7 @@ public class TaskList implements Runnable {
             if (command == null || QUIT.equals(command)) {
                 break;
             }
-            commandParsing.execute(command);
+            commandFactory.create(command).execute();
         }
     }
 

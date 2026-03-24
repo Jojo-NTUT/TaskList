@@ -18,7 +18,7 @@
 │       └── taskList.java  
 └── console   
     ├── adapter  
-    │   └── commandParsing.java  
+    │   └── commandFactory.java  
     └── framework  
         └── taskListConsole.java  //main()、run()
 ```
@@ -35,7 +35,7 @@
 │       └── inMemoryRepository.java  
 └── console   
     ├── adapter  
-    │   └── commandParsing.java  
+    │   └── commandFactory.java  
     └── framework  
         └── taskListConsole.java  
 ```
@@ -56,7 +56,7 @@
 │       └── inMemoryRepository.java  
 └── console   
     ├── adapter  
-    │   └── commandParsing.java  
+    │   └── commandFactory.java  
     └── framework  
         └── taskListConsole.java  
 ```
@@ -78,7 +78,7 @@ because contain main() and run()
 │       └── inMemoryRepository.java  
 └── console   
     ├── adapter  
-    │   └── commandParsing.java  
+    │   └── commandFactory.java  
     └── framework  
         └── taskList.java  
 ```
@@ -101,12 +101,15 @@ because contain main() and run()
 └── console   
     ├── adapter  
     │   ├── console.java  
-    │   └── commandParsing.java  
+    │   └── commandFactory.java  
     └── framework  
         ├── systemConsole.java   
         └── taskList.java 
 ```
-## using  Command Pattern to refactor CommanParsing
+## using  Command and Factory Patterns to refactor CommanParsing
+因為CommandParsing同時負責了：解析command、決定呼叫哪個use case、格式化輸出
+Command Pattern 用來封裝command邏輯
+Factory Pattern 用來負責command物件的create
 ```text
 ├── taskManagement  
 │   ├── entities  
@@ -124,8 +127,15 @@ because contain main() and run()
 └── console   
     ├── adapter  
     │   ├── console.java  
-    │   └── commandParsing.java  
+    │   └── commands
+    │       ├── Command.java  
+    │       ├── AddCommand.java  
+    │       ├── CheckCommand.java  
+    │       ├── ErrorCommand.java  
+    │       ├── HelpCommand.java    
+    │       └── ShowCommand.java      
     └── framework  
+        ├── commandFactory.java 
         ├── systemConsole.java   
         └── taskList.java 
 ```

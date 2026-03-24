@@ -7,11 +7,10 @@ import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.io.PrintWriter;
 
-import com.codurance.training.tasks.console.adapter.CommandParsing;
+import com.codurance.training.tasks.console.framework.CommandFactory;
 import com.codurance.training.tasks.console.adapter.Console;
 import com.codurance.training.tasks.console.framework.SystemConsole;
 import com.codurance.training.tasks.console.framework.TaskList;
-//import com.codurance.training.tasks.taskManagement.framework.InMemoryRepository;
 import com.codurance.training.tasks.taskManagement.framework.InMemoryRepository;
 import com.codurance.training.tasks.taskManagement.useCase.*;
 import org.junit.After;
@@ -45,13 +44,13 @@ public final class ApplicationTest {
         CheckTaskUseCase checkTaskUseCase = new CheckTaskUseCase(repository);
         UncheckTaskUseCase uncheckTaskUseCase = new UncheckTaskUseCase(repository);
         ShowProjectsUseCase showProjectsUseCase = new ShowProjectsUseCase(repository);
-        CommandParsing commandParsing = new CommandParsing(console,
+        CommandFactory commandFactory = new CommandFactory(console,
                 addProjectUseCase,
                 addTaskUseCase,
                 checkTaskUseCase,
                 uncheckTaskUseCase,
                 showProjectsUseCase);
-        TaskList taskListApp = new TaskList(console, commandParsing);
+        TaskList taskListApp = new TaskList(console, commandFactory);
         applicationThread = new Thread(taskListApp);
     }
 
