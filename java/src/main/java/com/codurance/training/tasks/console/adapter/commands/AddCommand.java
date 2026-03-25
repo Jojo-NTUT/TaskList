@@ -1,6 +1,7 @@
 package com.codurance.training.tasks.console.adapter.commands;
 
 import com.codurance.training.tasks.console.adapter.Console;
+import com.codurance.training.tasks.taskManagement.entities.ProjectName;
 import com.codurance.training.tasks.taskManagement.useCase.AddProjectUseCase;
 import com.codurance.training.tasks.taskManagement.useCase.AddTaskUseCase;
 

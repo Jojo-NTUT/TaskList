@@ -10,9 +10,9 @@ public interface TaskListRepository {
     - 在framework layer 決定具體實作細節
     */
     List<Project> findAllProjects();
-    Project findProjectByName(String name);
+    Project findProjectByName(ProjectName name);
 
-    Task findTaskById(long id);
+    Task findTaskById(TaskId id);
 
     long nextId();
 }

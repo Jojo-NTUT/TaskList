@@ -1,8 +1,7 @@
 package com.codurance.training.tasks.taskManagement.framework;
 
-import com.codurance.training.tasks.taskManagement.entities.Project;
-import com.codurance.training.tasks.taskManagement.entities.Task;
-import com.codurance.training.tasks.taskManagement.entities.TaskListRepository;
+import com.codurance.training.tasks.taskManagement.entities.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,9 +15,9 @@ public class InMemoryRepository implements TaskListRepository {
     }
 
     @Override
-    public Project findProjectByName(String name) {
+    public Project findProjectByName(ProjectName name) {
         for (Project project : Projects) {
-            if (project.getName().equals(name)) {
+            if (project.getName().value().equals(name.value())) {
                 return project;
             }
         }
@@ -26,10 +25,10 @@ public class InMemoryRepository implements TaskListRepository {
     }
 
     @Override
-    public Task findTaskById(long id) {
+    public Task findTaskById(TaskId id) {
         for (Project project : Projects) {
             for (Task task : project.getTasks()) {
-                if (task.getId() == id) {
+                if (task.getId().value() == id.value()) {
                     return task;
                 }
             }

@@ -1,8 +1,6 @@
 package com.codurance.training.tasks.taskManagement.useCase;
 
-import com.codurance.training.tasks.taskManagement.entities.Project;
-import com.codurance.training.tasks.taskManagement.entities.Task;
-import com.codurance.training.tasks.taskManagement.entities.TaskListRepository;
+import com.codurance.training.tasks.taskManagement.entities.*;
 
 public class AddTaskUseCase {
         private final TaskListRepository repository;
@@ -12,12 +10,15 @@ public class AddTaskUseCase {
         }
 
         public boolean addTask(String projectName, String description) {
-            Project project = repository.findProjectByName(projectName);
+            ProjectName name = new ProjectName(projectName);
+            Project project = repository.findProjectByName(name);
             if (project == null) {
                 return false;
             }
 
-            project.addTask(new Task(repository.nextId(), description));
+            TaskId taskId = new TaskId(repository.nextId());
+            TaskDescription taskDescription = new TaskDescription(description);
+            project.addTask(new Task(taskId, taskDescription));
             return true;
         }
 }

@@ -4,6 +4,8 @@ import com.codurance.training.tasks.console.adapter.Console;
 import com.codurance.training.tasks.taskManagement.entities.Project;
 import com.codurance.training.tasks.taskManagement.entities.Task;
 import com.codurance.training.tasks.taskManagement.useCase.ShowProjectsUseCase;
+import com.codurance.training.tasks.taskManagement.useCase.dto.ProjectDTO;
+import com.codurance.training.tasks.taskManagement.useCase.dto.TaskDTO;
 
 public class ShowCommand implements  Command {
     private final ShowProjectsUseCase showProjectsUseCase;
@@ -16,10 +18,10 @@ public class ShowCommand implements  Command {
 
     @Override
     public void execute() {
-        for (Project project : showProjectsUseCase.findAllProjects()) {
-            console.println(project.getName());
-            for (Task task : project.getTasks()) {
-                console.printf("    [%c] %d: %s%n", (task.isDone() ? 'x' : ' '), task.getId(), task.getDescription());
+        for (ProjectDTO project : showProjectsUseCase.findAllProjects()) {
+            console.println(project.name);
+            for (TaskDTO task : project.tasks) {
+                console.printf("    [%c] %d: %s%n", (task.done ? 'x' : ' '), task.id, task.description);
             }
             console.println("");
         }

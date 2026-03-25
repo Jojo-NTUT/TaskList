@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class Project {
-    private final String name;
+    private final ProjectName name;
     private final List<Task> Tasks = new ArrayList<>();
 
-    public Project(String name) {
+    public Project(ProjectName name) {
         this.name = name;
     }
 
-    public String getName() {
+    public ProjectName getName() {
         return name;
     }
 
@@ -23,12 +23,4 @@ public final class Project {
         Tasks.add(task);
     }
 
-    public Task findTaskById(long id) {
-        for (Task task : Tasks) {
-            if (task.getId() == id) {
-                return task;
-            }
-        }
-        return null;
-    }
 }

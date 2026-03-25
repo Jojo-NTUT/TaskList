@@ -1,21 +1,21 @@
 package com.codurance.training.tasks.taskManagement.entities;
 
 public final class Task {
-    private final long id;
-    private final String description;
+    private final TaskId id;
+    private final TaskDescription description;
     private boolean done;
 
-    public Task(long id, String description) {
+    public Task(TaskId id, TaskDescription description) {
         this.id = id;
         this.description = description;
         this.done = false;
     }
 
-    public long getId() {
+    public TaskId getId() {
         return id;
     }
 
-    public String getDescription() {
+    public TaskDescription getDescription() {
         return description;
     }
 

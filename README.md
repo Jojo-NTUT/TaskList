@@ -34,14 +34,40 @@
     └── framework  
         └── taskListConsole.java  //main()、run()
 ```
+## Replace primitive types with value objects and add DTO
+```text
+├── taskManagement  
+│   ├── entities  
+│   │   ├── task.java  
+│   │   ├── taskId.java 
+│   │   ├── taskDescription.java 
+│   │   ├── project.java 
+│   │   └── projectName.java  
+│   └── useCase  
+│       ├── dto 
+│       │   ├── projectDTO.java 
+│       │   └── taskDTO.java  
+│       └── taskList.java  
+└── console   
+    ├── adapter  
+    │   └── commandFactory.java  
+    └── framework  
+        └── taskListConsole.java  //main()、run()
+```
 ## Extract taskList's data access logic to Repository interface in entities layer and add InMemoryRepository implementation in framework layer
 ```text
 ├── taskManagement  
 │   ├── entities  
 │   │   ├── task.java  
-│   │   ├── project.java  
-│   │   └── taskListRepository.java  
-│   ├── useCase  
+│   │   ├── taskId.java 
+│   │   ├── taskDescription.java 
+│   │   ├── project.java 
+│   │   ├── projectName.java  
+│   │   └── taskListRepository.java   
+│   ├── useCase
+│   │   ├── dto 
+│   │   │   ├── projectDTO.java 
+│   │   │   └── taskDTO.java  
 │   │   └── taskList.java  
 │   └── framework 
 │       └── inMemoryRepository.java  
@@ -56,9 +82,15 @@
 ├── taskManagement  
 │   ├── entities  
 │   │   ├── task.java  
-│   │   ├── project.java  
-│   │   └── taskListRepository.java  
+│   │   ├── taskId.java 
+│   │   ├── taskDescription.java 
+│   │   ├── project.java 
+│   │   ├── projectName.java  
+│   │   └── taskListRepository.java 
 │   ├── useCase  
+│   │   ├── dto 
+│   │   │   ├── projectDTO.java 
+│   │   │   └── taskDTO.java 
 │   │   ├── addProjectUseCase.java 
 │   │   ├── addTaskUseCase.java 
 │   │   ├── checkTask.java 
@@ -78,9 +110,15 @@ because contain main() and run()
 ├── taskManagement  
 │   ├── entities  
 │   │   ├── task.java  
-│   │   ├── project.java  
-│   │   └── taskListRepository.java  
+│   │   ├── taskId.java 
+│   │   ├── taskDescription.java 
+│   │   ├── project.java 
+│   │   ├── projectName.java  
+│   │   └── taskListRepository.java 
 │   ├── useCase  
+│   │   ├── dto 
+│   │   │   ├── projectDTO.java 
+│   │   │   └── taskDTO.java 
 │   │   ├── addProjectUseCase.java 
 │   │   ├── addTaskUseCase.java 
 │   │   ├── checkTask.java 
@@ -100,9 +138,15 @@ because contain main() and run()
 ├── taskManagement  
 │   ├── entities  
 │   │   ├── task.java  
-│   │   ├── project.java  
-│   │   └── taskListRepository.java  
+│   │   ├── taskId.java 
+│   │   ├── taskDescription.java 
+│   │   ├── project.java 
+│   │   ├── projectName.java  
+│   │   └── taskListRepository.java 
 │   ├── useCase  
+│   │   ├── dto 
+│   │   │   ├── projectDTO.java 
+│   │   │   └── taskDTO.java 
 │   │   ├── addProjectUseCase.java 
 │   │   ├── addTaskUseCase.java 
 │   │   ├── checkTask.java 
@@ -126,9 +170,15 @@ Factory Pattern 用來負責command物件的create
 ├── taskManagement  
 │   ├── entities  
 │   │   ├── task.java  
-│   │   ├── project.java  
+│   │   ├── taskId.java 
+│   │   ├── taskDescription.java 
+│   │   ├── project.java 
+│   │   ├── projectName.java  
 │   │   └── taskListRepository.java  
 │   ├── useCase  
+│   │   ├── dto 
+│   │   │   ├── projectDTO.java 
+│   │   │   └── taskDTO.java  
 │   │   ├── addProjectUseCase.java 
 │   │   ├── addTaskUseCase.java 
 │   │   ├── checkTask.java 

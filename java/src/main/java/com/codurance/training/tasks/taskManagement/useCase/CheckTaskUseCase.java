@@ -1,6 +1,7 @@
 package com.codurance.training.tasks.taskManagement.useCase;
 
 import com.codurance.training.tasks.taskManagement.entities.Task;
+import com.codurance.training.tasks.taskManagement.entities.TaskId;
 import com.codurance.training.tasks.taskManagement.entities.TaskListRepository;
 
 public class CheckTaskUseCase {
@@ -11,7 +12,8 @@ public class CheckTaskUseCase {
     }
 
     public boolean checkTask(long id) {
-        Task task = repository.findTaskById(id);
+        TaskId taskId = new TaskId(id);
+        Task task = repository.findTaskById(taskId);
         if (task == null) {
             return false;
         }
